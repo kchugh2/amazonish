@@ -52,6 +52,7 @@ public class ProductPage extends HttpServlet {
 							 + dataset.getProddescription()+"</td><td>" + dataset.getProdcost()+"</td>"+"</div>";
 		
 		request.setAttribute("message",message);
+		request.setAttribute("url", dataset.getImageLink());
 		getServletContext().getRequestDispatcher("/ProdPage.jsp").forward(request, response);
 	}
 }

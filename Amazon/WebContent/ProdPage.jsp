@@ -69,6 +69,9 @@
 <table class = "table table-striped">
 	${message}
 </table>
+<div align = "center">
+<img src = "${url}">
+</div>
 <a href="CartAddServlet" class="btn btn-info" role="button">Add To Cart</a>
 <a href="HomeServlet" class="btn btn-info" role="button">Back To Shopping</a>
 </div>

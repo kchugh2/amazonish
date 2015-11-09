@@ -2,6 +2,7 @@ package amazon;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -47,6 +48,7 @@ public class CartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		double totalCost = 0, cost=0;
 		HttpSession session = request.getSession();
 		if (session.getAttribute("username") == null)
 			response.sendRedirect("LoginServlet");
@@ -61,8 +63,12 @@ public class CartServlet extends HttpServlet {
 				message = message + "<div class = \"row\"<br><tr><td>"
 						+ dataset.get(i).getProduct() + "</td><td>"
 						+ dataset.get(i).getProdcost() + "</td></tr><br>";
+			
+				cost = (dataset.get(i).getProdcost()).doubleValue();
+				totalCost= totalCost+ cost ;
 			}
 			request.setAttribute("message", message);
+			request.setAttribute("cost", totalCost);
 			getServletContext().getRequestDispatcher("/Fullcart.jsp").forward(
 					request, response);
 

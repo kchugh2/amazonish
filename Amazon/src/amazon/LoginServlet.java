@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 			if(AmazonDB.getProfile(request.getParameter("username"),request.getParameter("password"))!=null)
 				{
 					session.setAttribute("username", request.getParameter("username"));
+					
 					response.sendRedirect("CartServlet");
 					
 				}

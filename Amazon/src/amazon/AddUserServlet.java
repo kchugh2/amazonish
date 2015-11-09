@@ -53,7 +53,7 @@ public class AddUserServlet extends HttpServlet {
 		
 			else
 				{
-					response.sendRedirect("InvalidSignUp.html");
+					response.sendRedirect("InvalidSignUp.jsp");
 				}
 			
 		

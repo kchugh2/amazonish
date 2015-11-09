@@ -18,6 +18,9 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long prodsku;
 
+	@Column(name="IMAGE_LINK")
+	private String imageLink;
+
 	private String prodbrand;
 
 	private BigDecimal prodcost;
@@ -35,6 +38,14 @@ public class Product implements Serializable {
 
 	public void setProdsku(long prodsku) {
 		this.prodsku = prodsku;
+	}
+
+	public String getImageLink() {
+		return this.imageLink;
+	}
+
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
 	}
 
 	public String getProdbrand() {
