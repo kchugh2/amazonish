@@ -21,39 +21,45 @@ import model.Product;
 @WebServlet("/CartAddServlet")
 public class CartAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CartAddServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public CartAddServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				doPost(request,response);
-				}
+		doPost(request, response);
+	}
 
-			/**
-			 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-			 */
-			protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				HttpSession session = request.getSession();
-				// TODO Auto-generated method stub
-				String user = (String) session.getAttribute("username");
-				Product p = new Product();
-				p = AmazonDB.getProduct((Integer) session.getAttribute("prodID"));
-				Cart cartItem = new Cart();
-				cartItem.setProduct(p.getProdname());
-				cartItem.setCustname(user);
-				cartItem.setProdcost(p.getProdcost());
-				AmazonDB.addToCart(cartItem);
-				
-				response.sendRedirect("CartServlet");
-			}
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("username") == null)
+			response.sendRedirect("Login.jsp");
+		else {
+			String user = (String) session.getAttribute("username");
+			Product p = new Product();
+			p = AmazonDB.getProduct((Integer) session.getAttribute("prodID"));
+			Cart cartItem = new Cart();
+			cartItem.setProduct(p.getProdname());
+			cartItem.setCustname(user);
+			cartItem.setProdcost(p.getProdcost());
+			AmazonDB.addToCart(cartItem);
+
+			response.sendRedirect("CartServlet");
 		}
-
+	}
+}
