@@ -44,7 +44,8 @@ public class ProductPage extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		Product dataset = new Product();
-		int i=0;
+		int j=0;
+		double avgRating =0;
 		ArrayList<Productreview> dataset2 = new ArrayList<Productreview>();
 		String skustring = request.getParameter("prodID");
 
@@ -64,18 +65,20 @@ public class ProductPage extends HttpServlet {
 				+ dataset.getProdcost() + "</td>" + "</div>";
 
 		if (dataset2 != null) {
-			for(int j = 0; j< dataset2.size(); j++) {
+			for(j = 0; j< dataset2.size(); j++) {
 				message2 = message2 + "<div <br><tr><td>"
 						+ dataset2.get(j).getCustomerusername() + "</td><td>"
 						+ dataset2.get(j).getCustrating() + "</td><td>"
 						+ dataset2.get(j).getCustreview() + "</td><td>"
 						+ "</tr></div>";
+				avgRating = avgRating + dataset2.get(j).getCustrating().doubleValue();
 			}
 		} else
 			message2 = "<h4> There Are No Reviews Yet</h4>";
 
 		request.setAttribute("message", message);
 		request.setAttribute("message2", message2);
+		request.setAttribute("avgRating", (avgRating/j));
 		request.setAttribute("url", dataset.getImageLink());
 		getServletContext().getRequestDispatcher("/ProdPage.jsp").forward(
 				request, response);
